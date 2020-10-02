@@ -121,10 +121,10 @@ class App {
   
     openTooltip(event) {
       if (!event.target.matches(".toolbar-color")) return;
-      this.id = event.target.nextElementSibling.dataset.id;
+      this.id = event.target.dataset.id;
       const noteCoords = event.target.getBoundingClientRect();
-      const horizontal = noteCoords.left;
-      const vertical = window.scrollY - 20;
+      const horizontal = noteCoords.left + window.scrollX;
+      const vertical = noteCoords.top + window.scrollY;
       this.$colorTooltip.style.transform = `translate(${horizontal}px, ${vertical}px)`;
       this.$colorTooltip.style.display = "flex";
     }
@@ -202,12 +202,12 @@ class App {
             <div class="note-text">${note.text}</div>
             <div class="toolbar-container">
               <div class="toolbar">
-                <img class="toolbar-color" data-id=${
-                  note.id
-                } src="https://icon.now.sh/palette">
-                <img data-id=${
-                  note.id
-                } class="toolbar-delete" src="https://icon.now.sh/delete">
+                <i class="fas fa-trash toolbar-delete" data-id=${
+                    note.id
+                  }></i>
+                  <i class="fas fa-palette toolbar-color" data-id=${
+                    note.id
+                  }></i>
               </div>
             </div>
           </div>
@@ -219,3 +219,8 @@ class App {
   
   new App();
   
+
+//   trash
+// // palette
+// <i class="fas fa-trash"></i>
+// <i class="fas fa-palette"></i>
